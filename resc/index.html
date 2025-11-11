@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rescue Hub — Single Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <header>
+    <div class="logo-title">
+      <img src="images/logo.jpg" alt="Rescue Hub logo" />
+      <h1>RESCUE HUB</h1>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#authorities">Authorities</a>
+      <a href="#alert">Send Alert</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HOME SECTION -->
+  <section id="home">
+    <div class="home-text">
+      <h2>"YOUR SAFETY, OUR PRIORITY"</h2>
+      <p>Quick access to emergency services</p>
+      <button type="button" onclick="sendAlertShortcut()">SEND ALERT</button>
+
+      <!-- QUICK LINKS -->
+      <div class="quicklinks-container">
+        <div class="quicklink-box">Police - 15</div>
+        <div class="quicklink-box">Ambulance - 115</div>
+        <div class="quicklink-box">Fire Brigade - 16</div>
+        <div class="quicklink-box">Edhi Foundation</div>
+      </div>
+    </div>
+
+    <div class="home-image">
+      <img src="images/home-image.png" alt="Emergency Services" />
+    </div>
+  </section>
+
+  <!-- AUTHORITIES SECTION -->
+  <section id="authorities">
+    <h2>Find and Contact the Right Authority Quickly</h2>
+
+    <div class="authorities-grid">
+      <div class="authority-box">
+        <h3>Police</h3>
+        <p>Maintaining law and order</p>
+        <a href="tel:15" class="call-box">CALL NOW: 15</a>
+      </div>
+
+      <div class="authority-box">
+        <h3>Ambulance</h3>
+        <p>Providing medical assistance</p>
+        <a href="tel:115" class="call-box">CALL NOW: 115</a>
+      </div>
+
+      <div class="authority-box">
+        <h3>Fire Brigade</h3>
+        <p>Responding to fire emergencies</p>
+        <a href="tel:16" class="call-box">CALL NOW: 16</a>
+      </div>
+
+      <div class="authority-box">
+        <h3>Edhi Foundation</h3>
+        <p>24/7 Humanitarian and rescue services</p>
+        <a href="tel:115" class="call-box">CALL NOW: 115</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALERT SECTION -->
+  <section id="alert">
+    <h2>Send Emergency Alert</h2>
+    <p>Notify all the authorities in case of an emergency</p>
+
+    <form id="alertForm" onsubmit="sendAlertFromForm(event)">
+      <div>
+        <label>Name
+          <input type="text" name="name" required />
+        </label>
+      </div>
+      <div>
+        <label>Location
+          <input type="text" name="location" required />
+        </label>
+      </div>
+      <div>
+        <label>Type of Emergency
+          <select name="type" required>
+            <option value="">Select Type</option>
+            <option>Medical</option>
+            <option>Fire</option>
+            <option>Accident</option>
+            <option>Other</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Description
+          <textarea name="description" rows="4"></textarea>
+        </label>
+      </div>
+      <button type="submit">Send Alert</button>
+    </form>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Reach out to Rescue Hub anytime for support or queries.</p>
+
+    <form id="contactForm" onsubmit="sendMessage(event)">
+      <div>
+        <label>Name
+          <input type="text" name="name" required />
+        </label>
+      </div>
+      <div>
+        <label>Email
+          <input type="email" name="email" required />
+        </label>
+      </div>
+      <div>
+        <label>Subject
+          <input type="text" name="subject" required />
+        </label>
+      </div>
+      <div>
+        <label>Message
+          <textarea name="message" rows="4"></textarea>
+        </label>
+      </div>
+      <button type="submit">SEND MESSAGE</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>@Rescue Hub | HOME | CONTACT INFO</p>
+  </footer>
+
+  <!-- SIMPLE JS -->
+  <script>
+    function sendAlertShortcut() {
+      location.hash = '#alert';
+    }
+
+    function sendAlertFromForm(e) {
+      e.preventDefault();
+      alert('Emergency alert has been sent!');
+      e.target.reset();
+    }
+
+    function sendMessage(e) {
+      e.preventDefault();
+      alert('Your message has been sent!');
+      e.target.reset();
+    }
+  </script>
+
+</body>
+</html>
+
