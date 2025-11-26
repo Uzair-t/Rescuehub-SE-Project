@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rescue Hub — Karachi Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Minimal header -->
+  <header class="mini-header">
+    <div class="title-wrap">
+      <h1>Rescue Hub — Dashboard (Karachi)</h1>
+      <p class="subtitle">Live updates of rescue units, recent incidents, and city alerts</p>
+    </div>
+    <a class="back-home" href="index.html" title="Back to Home">⟵ Back to Home</a>
+  </header>
+
+  <main class="wrap">
+    <!-- Top stat cards -->
+    <section class="top-cards">
+      <div class="card stat">
+        <div class="icon shield" aria-hidden="true">
+          <!-- simple shield svg -->
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l7 3v5c0 5-4 9-7 11-3-2-7-6-7-11V5l7-3z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="label">Police Units</div>
+          <div class="value" id="policeCount">12</div>
+        </div>
+      </div>
+
+      <div class="card stat">
+        <div class="icon flame" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2s1.5 3 1.5 4.8S12 9 12 9s2-1.5 2-4.2S12 2 12 2zM7 14c0 3.9 2.9 6 5 6s5-2.1 5-6c0-2.6-2-4-4-4-2 0-4 1.2-4 4z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="label">Fire Brigade</div>
+          <div class="value" id="fireCount">4</div>
+        </div>
+      </div>
+
+      <div class="card stat">
+        <div class="icon ambulance" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 11v6h1a2 2 0 0 0 4 0h6a2 2 0 0 0 4 0h1v-6l-2-4H5L3 11zm5 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="label">Ambulances</div>
+          <div class="value" id="ambuCount">9</div>
+        </div>
+      </div>
+
+      <div class="card stat">
+        <div class="icon plus" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 11V6h2v5h5v2h-5v5h-2v-5H6v-2z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="label">Edhi Units</div>
+          <div class="value" id="edhiCount">15</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- main area: map left + incidents right -->
+    <section class="main-area">
+      <div class="map-panel" role="img" aria-label="Map showing unit locations">
+        <div class="map-controls">
+          <button class="map-btn" title="Zoom in">+</button>
+          <button class="map-btn" title="Zoom out">−</button>
+        </div>
+
+    
+        <div class="map-pins" aria-hidden="true">
+          <span class="pin red" style="left:56%; top:40%"></span>
+          <span class="pin green" style="left:22%; top:62%"></span>
+          <span class="pin yellow" style="left:70%; top:72%"></span>
+          <span class="pin green" style="left:40%; top:22%"></span>
+        </div>
+
+        <div class="map-actions">
+          <button class="call-btn small" onclick="callNumber('15')">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1.1-.2c1.2.5 2.6.8 4 .8a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C9.4 22 2 14.6 2 5a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1c0 1.4.3 2.8.8 4 .2.4.1.9-.2 1.1l-2.4 2.7z"/></svg>
+            Call Police
+          </button>
+
+          <button class="call-btn primary" onclick="callNumber('1122')">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2c5.6 0 10 4.4 10 10s-4.4 10-10 10S2 17.6 2 12 6.4 2 12 2zm1 14h2v-2h-2v2zm0-4h2V7h-2v5z"/></svg>
+            Call Ambulance
+          </button>
+        </div>
+      </div>
+
+      <aside class="incidents-panel">
+        <div class="inc-header">
+          <h2>Recent Incidents</h2>
+          <div class="updated">Last updated: <span id="lastUpdate">—</span></div>
+        </div>
+
+        <div id="incList" class="inc-list" aria-live="polite">
+          <!-- JS will inject incidents -->
+        </div>
+      </aside>
+    </section>
+
+    <!-- quick analytics row -->
+    <section class="analytics">
+      <div class="chart card">
+        <div class="chart-title">Incidents (Last 7 days)</div>
+        <!-- placeholder chart area -->
+        <div class="chart-placeholder">
+          <img src="images/chart.png" alt="Incidents Chart">
+        </div>
+        
+      </div>
+
+      <div class="card small">
+        <div class="label muted">Total incidents today</div>
+        <div class="value big" id="totalInc">8</div>
+      </div>
+
+      <div class="card small">
+        <div class="label muted">Active alerts</div>
+        <div class="value big" id="activeAlerts">3</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">Rescue Hub • Focused on Karachi — demo data</footer>
+
+  <script>
+    // demo incidents
+    const incidents = [
+      {id:1, title:'Road accident near Saddar', loc:'Saddar', time:'10:24', status:'Active', tag:'red'},
+      {id:2, title:'Shop fire at Burns Road', loc:'Burns Road', time:'09:50', status:'Resolved', tag:'green'},
+      {id:3, title:'Unconscious person', loc:'Nazimabad', time:'11:03', status:'Pending', tag:'yellow'}
+    ];
+
+    function renderIncidents(list){
+      const container = document.getElementById('incList');
+      container.innerHTML = '';
+      list.forEach(it=>{
+        const item = document.createElement('article');
+        item.className = 'incident card';
+        item.innerHTML = `
+          <div class="incident-main">
+            <div class="incident-title">${it.title}</div>
+            <div class="incident-meta">${it.loc} • ${it.time}</div>
+          </div>
+          <div class="incident-status ${it.tag}">${it.status}</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // initial render
+    renderIncidents(incidents);
+    document.getElementById('lastUpdate').innerText = new Date().toLocaleTimeString();
+
+    // simulated live counters
+    setInterval(()=> {
+      const r = ()=>Math.floor(Math.random()*6)+3;
+      document.getElementById('policeCount').innerText = r() + 6;
+      document.getElementById('fireCount').innerText = Math.floor(Math.random()*5)+1;
+      document.getElementById('ambuCount').innerText = Math.floor(Math.random()*8)+2;
+      document.getElementById('edhiCount').innerText = Math.floor(Math.random()*20)+5;
+      document.getElementById('totalInc').innerText = Math.floor(Math.random()*12)+2;
+      document.getElementById('activeAlerts').innerText = Math.floor(Math.random()*6);
+      document.getElementById('lastUpdate').innerText = new Date().toLocaleTimeString();
+    },7000);
+
+    function callNumber(num){
+      if(confirm('Call '+num+'? (Opens phone app on mobile)')){
+        window.location.href = 'tel:'+num;
+      }
+    }
+  </script>
+</body>
+</html>
